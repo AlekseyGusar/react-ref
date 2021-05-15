@@ -13,8 +13,10 @@ const operatoMap = {
 
 const checkOperator = operatorNumber => {
     let operatorName;
+    let regexp = /\d/g;
+    const operatorNuberCleared = operatorNumber.match(regexp).join('');
     Object.entries(operatoMap).map(([key, value]) => {
-        if (value.includes(+operatorNumber)) {
+        if (value.includes(+operatorNuberCleared)) {
             operatorName = key;
             return
         };
@@ -46,7 +48,7 @@ export default class Input extends Component{
         if (telephone === '' || this.state.regexp.test(telephone)) {
             this.setState({ [event.target.name]: telephone })
         }
-        if (event.target.name === 'operator' && telephone.length === 2) {
+        if (event.target.name === 'operator' && telephone.length > 2) {
             this.setState({operatorName: checkOperator(telephone)});
         };
         if (this.operator.current.value.length === 2 && this.phone.current.value.length === 7) {
