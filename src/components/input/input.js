@@ -7,14 +7,15 @@ const operatoMap = {
     'Vodafone': [50, 66, 95, 99],
     'Lifecell': [63, 73, 93],
     '3mob': [91],
-    'People.net': [63, 73, 93],
+    'People.net': [92],
     'intertelecom': [89, 94],
 };
 
 const checkOperator = operatorNumber => {
     let operatorName;
     let regexp = /\d/g;
-    const operatorNuberCleared = operatorNumber.match(regexp).join('');
+    const operatorNuberClearedArray = operatorNumber.match(regexp);
+    const operatorNuberCleared = operatorNuberClearedArray[0] + operatorNuberClearedArray[1];
     Object.entries(operatoMap).map(([key, value]) => {
         if (value.includes(+operatorNuberCleared)) {
             operatorName = key;
@@ -47,11 +48,12 @@ export default class Input extends Component{
         let telephone = event.target.value;
         if (this.state.regexp.test(telephone)) {
             this.setState({ [event.target.name]: telephone })
+            if (event.target.name === 'operator' && telephone.length >= 2) {
+              this.setState({ operatorName: checkOperator(telephone) });
+              this.phone.current.focus();
+            };
         }
-        if (event.target.name === 'operator' && telephone.length >= 2) {
-            this.setState({ operatorName: checkOperator(telephone) });
-            this.phone.current.focus();
-        };
+        
         if (this.operator.current.value.length >= 2 && this.phone.current.value.length >= 7) {
             this.setState({check: '✔️'});
         };
