@@ -46,17 +46,20 @@ export default class Input extends Component{
 
     handleChange(event) {
         let telephone = event.target.value;
+        if (event.target.name === 'operator' && telephone.length >= 2) {
+            this.setState({ operatorName: checkOperator(telephone) });
+            if (this.state.regexp.test(telephone)) {
+                this.phone.current.focus();
+            } 
+              
+        };
+
         if (this.state.regexp.test(telephone)) {
             this.setState({ [event.target.name]: telephone })
-            if (event.target.name === 'operator' && telephone.length >= 2) {
-              this.setState({ operatorName: checkOperator(telephone) });
-              this.phone.current.focus();
+            if (this.operator.current.value.length >= 2 && this.phone.current.value.length >= 7) {
+            this.setState({check: '✔️'});
             };
         }
-        
-        if (this.operator.current.value.length >= 2 && this.phone.current.value.length >= 7) {
-            this.setState({check: '✔️'});
-        };
     }
 
     render() {
