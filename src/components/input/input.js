@@ -48,10 +48,10 @@ export default class Input extends Component{
         if (telephone === '' || this.state.regexp.test(telephone)) {
             this.setState({ [event.target.name]: telephone })
         }
-        if (event.target.name === 'operator' && telephone.length > 2) {
+        if (event.target.name === 'operator' && telephone.length >= 2) {
             this.setState({operatorName: checkOperator(telephone)});
         };
-        if (this.operator.current.value.length === 2 && this.phone.current.value.length === 7) {
+        if (this.operator.current.value.length >= 2 && this.phone.current.value.length >= 7) {
             this.setState({check: '✔️'});
         };
     }
