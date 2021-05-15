@@ -32,7 +32,7 @@ export default class Input extends Component{
             regexp: /^[0-9]+$/,
             operator: '',
             phone: '',
-            check: '-'
+            check: "-"
         };
         this.operator = React.createRef();
         this.phone = React.createRef();
@@ -45,7 +45,7 @@ export default class Input extends Component{
 
     handleChange(event) {
         let telephone = event.target.value;
-        if (telephone === '' || this.state.regexp.test(telephone)) {
+        if (this.state.regexp.test(telephone)) {
             this.setState({ [event.target.name]: telephone })
         }
         if (event.target.name === 'operator' && telephone.length >= 2) {
