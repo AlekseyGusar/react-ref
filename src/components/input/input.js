@@ -49,7 +49,8 @@ export default class Input extends Component{
             this.setState({ [event.target.name]: telephone })
         }
         if (event.target.name === 'operator' && telephone.length >= 2) {
-            this.setState({operatorName: checkOperator(telephone)});
+            this.setState({ operatorName: checkOperator(telephone) });
+            this.phone.current.focus();
         };
         if (this.operator.current.value.length >= 2 && this.phone.current.value.length >= 7) {
             this.setState({check: '✔️'});
